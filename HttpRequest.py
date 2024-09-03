@@ -5,6 +5,9 @@ class HttpRequest:
         data = {}
 
         # Разделяем запрос на строки
+
+        body = request.split('\r\n\r\n')[1]
+        data['body'] = body
         lines = request.split('\r\n')
 
         # Первая строка - это стартовая строка с методом, URL и HTTP-версией
@@ -12,9 +15,8 @@ class HttpRequest:
 
         # Заголовки идут после стартовой строки, до пустой строки (которая разделяет заголовки и тело)
         headers = {}
-        for index, line in enumerate(lines[1:]):
+        for line in lines[1:]:
             if line == '':
-                data['body'] = lines[index + 1:]
                 break
             header, value = line.split(': ', 1)
             headers[header] = value

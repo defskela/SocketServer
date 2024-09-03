@@ -37,7 +37,7 @@ def main():
         if msg:
             # преобразуем строчку в объект HttpRequest, который имеет словарь request
             obj = HttpRequest(msg.decode('utf-8'))
-            print(obj.request)
+            # print(obj.request)
 
             response = app(obj.request)
 

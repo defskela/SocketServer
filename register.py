@@ -12,3 +12,4 @@ def paths():
     register('/start', start)
     register('/method', meth)
     register('/body', body)
+    register('/create_dog', create_dog)
