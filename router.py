@@ -1,4 +1,4 @@
-from my_urls import views
+from register import views
 
 
 def router(url):

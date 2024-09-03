@@ -10,3 +10,5 @@ def register(url, vie):
 
 def paths():
     register('/start', start)
+    register('/method', meth)
+    register('/body', body)

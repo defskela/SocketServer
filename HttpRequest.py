@@ -12,9 +12,10 @@ class HttpRequest:
 
         # Заголовки идут после стартовой строки, до пустой строки (которая разделяет заголовки и тело)
         headers = {}
-        for line in lines[1:]:
+        for index, line in enumerate(lines[1:]):
             if line == '':
-                break  # Пустая строка означает конец заголовков
+                data['body'] = lines[index + 1:]
+                break
             header, value = line.split(': ', 1)
             headers[header] = value
 

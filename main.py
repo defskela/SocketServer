@@ -2,7 +2,7 @@ import socket
 
 from app import app
 from HttpRequest import HttpRequest
-from my_urls import paths
+from register import paths
 
 
 def main():
@@ -31,18 +31,20 @@ def main():
 
         print('Got connection from', addr)
 
+        # получаем строчку из браузера - request
         msg = con.recv(1024)
 
+        if msg:
+            # преобразуем строчку в объект HttpRequest, который имеет словарь request
+            obj = HttpRequest(msg.decode('utf-8'))
+            print(obj.request)
 
-        obj = HttpRequest(msg.decode('utf-8'))
-        print(obj.request)
+            response = app(obj.request)
 
-        response = app(obj.request)
+            con.send(response)
 
-        con.send(response)
-
-    con.close()
-    print('End')
+        con.close()
+        print('End')
 
 if __name__ == "__main__":
     main()
